@@ -98,6 +98,7 @@ int main()
 	SetConsoleOutputCP(1251);
 	setlocale(LC_ALL, "Russian");
 	bool exit = 0;
+	string reciever;
 	string command = "";
 
 	//раз раз раз
@@ -154,6 +155,7 @@ int main()
 					}
 					else
 					{
+						reciever = command;
 						chat->ShowPrivate(currentuser->getUserName(), command, messages);
 						while (command != "endchat")
 						{
@@ -166,7 +168,7 @@ int main()
 							}
 							else
 							{
-								messages.push_back(Message(command, currentuser->getUserName(), command));
+								messages.push_back(Message(command, currentuser->getUserName(), reciever));
 								messages[messages.size() - 1].Showmessage();
 							}
 						}
