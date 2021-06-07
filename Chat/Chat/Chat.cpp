@@ -8,7 +8,7 @@ void Chat::Show(const User& user, std::vector<Message>& message)
     {
         if (message[c].GetRecieverName() == user.getUserName() || message[c].GetBool() == 0)
         {
-            Message::Showmessage;
+            message[c].Showmessage();
         }
         else
         {

@@ -33,6 +33,11 @@ string User::getUserName() const
     return string(_username);
 }
 
+string User::getPassword() const
+{
+    return string(_password);
+}
+
 Message* User::getCurrentMessage() const
 {
     return this->_ptrCurrentMessage;

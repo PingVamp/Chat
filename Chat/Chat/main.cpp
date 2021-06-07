@@ -12,6 +12,8 @@ using namespace std;
 
 vector<Message> messages;
 vector<User> users = { User("Вася", "123"), User{"Петя","321"} };
+User* currentuser;
+
 void registration()
 {
 	bool regpass = 0;
@@ -47,16 +49,53 @@ void registration()
 			}
 		}
 	}
+	regpass = 0;
 }
+
+void enter()
+{
+	string username;
+	string password;
+	bool enterpass = 0;
+	while (enterpass == 0)
+	{
+		cout << "Введите имя пользователя" << endl;
+		cin >> username;
+		for (int i = 0; i < users.size(); i++)
+		{
+			if (users[i].getUserName() == username)
+			{
+				cout << "Введите пароль" << endl;
+				cin >> password;
+				if (users[i].getPassword() == password)
+				{
+					cout << "Вход успешен" << endl;
+					currentuser = &users[i];
+					enterpass = 1;
+					break;
+				}
+				else
+				{
+					cout << "Неверный пароль" << endl;
+					break;
+				}
+			}
+			else if ((i + 1 == users.size()))
+			{
+				cout << "Нет такого пользователя" << endl;
+			}
+		}
+	}
+	enterpass = 0;
+}
+
 
 int main()
 {
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
 	setlocale(LC_ALL, "Russian");
-	
 	bool exit = 0;
-
 	string command = "";
 
 	//раз раз раз
@@ -76,10 +115,17 @@ int main()
 			{
 				registration();
 			}
+			if (command == "enter")
+			{
+				enter();
+			}
 			for (int i = 0; i < users.size(); i++)
 			{
 				users[i].DisplayUserName();
 			}
+			cout << endl;
+			currentuser->DisplayUserName();
+
 		}
 	}
 

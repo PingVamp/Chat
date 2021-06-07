@@ -22,6 +22,7 @@ public:
     ~User();
 
     string getUserName() const;
+    string getPassword() const;
     Message* getCurrentMessage() const;
     void DisplayUserName() const;
     void setUserName(string username);
