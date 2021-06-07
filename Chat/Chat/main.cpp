@@ -59,7 +59,7 @@ int main()
 
 	string command = "";
 
-
+	//раз раз раз
 	while (exit != 1)
 	{
 		while (command != "exit")
