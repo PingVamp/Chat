@@ -27,3 +27,6 @@ public:
     void setPassword(string password);
     void setCurrentMessage(Message& ptrCurrentMessage);
 };
+
+
+// Тестовый коммит для проверки синхронизации
