@@ -14,6 +14,12 @@ User::User(string username)
     _username = username;
 }
 
+User::User(string username, string password)
+{
+    _username = username;
+    _password = password;
+}
+
 User::User()
 {
 }

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <iostream>
-#include "Message"
+#include "Message.h"
 #include <string>
 
 using namespace std;
@@ -16,6 +16,7 @@ private:
 public:
     User(string username, string password, Message& ptrCurrentMessage);
     User(string username);
+    User(string username, string password);
     User();
 
     ~User();
