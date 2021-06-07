@@ -14,7 +14,7 @@ private:
     Message* _ptrCurrentMessage = 0; // указатель на текущее сообщение
 
 public:
-    User(string username, string password, Message& ptrCurrentMessage);
+    User(string username, string password, Message* ptrCurrentMessage);
     User(string username);
     User(string username, string password);
     User();
@@ -22,7 +22,7 @@ public:
     ~User();
 
     string getUserName() const;
-    Message& getCurrentMessage() const;
+    Message* getCurrentMessage() const;
     void DisplayUserName() const;
     void setUserName(string username);
     void setPassword(string password);

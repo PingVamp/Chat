@@ -2,7 +2,7 @@
 #include "User.h"
 
 
-User::User(string username, string password, Message& ptrCurrentMessage)
+User::User(string username, string password, Message* ptrCurrentMessage)
 {
     _username = username;
     _password = password;
@@ -33,7 +33,7 @@ string User::getUserName() const
     return string(_username);
 }
 
-Message& User::getCurrentMessage() const
+Message* User::getCurrentMessage() const
 {
     return this->_ptrCurrentMessage;
 }
