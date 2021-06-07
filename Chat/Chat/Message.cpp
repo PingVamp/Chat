@@ -29,6 +29,11 @@ string Message::GetMessage()
 	return this->_message;
 }
 
+bool Message::GetBool() const
+{
+	return this->isprivate;
+}
+
 void Message::Showmessage()
 {
 	cout << this->_senderName <<":" << this->_message << endl;

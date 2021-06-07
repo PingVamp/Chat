@@ -1,41 +1,23 @@
+#include "Chat.h"
 #include <iostream>
-#include <vector>
-#include <string>
 
-using namespace std;
-
-vector<string> myVector;
-
-class Chat
+void Chat::Show(const User& user, std::vector<Message>& message)
 {
-public:
-    void ShowCommon()
+    size_t size = message.size();
+    for (size_t c = 0; c < size; c++)
     {
-        vector<string>::const_iterator it;
-        it = myVector.begin();
-        while (it != myVector.end())
+        if (message[c].GetRecieverName() == user.getUserName() || message[c].GetBool() == 0)
         {
-            cout << *it << endl;
-            ++it;
+            Message::Showmessage;
+        }
+        else
+        {
+            cout << "Нет сообщений" << endl;
         }
     }
-    void WriteCommon(string str)
-    {
-        myVector.push_back(str);
-    }
-
-    //void ShowPrivate() {}
-    //void WritePrivate() {}
-};
-
-auto main() -> int
-{
-    Chat chat;
-    chat.WriteCommon("Hello");
-    chat.WriteCommon("World!");
-    chat.ShowCommon();
-
-
-    return 0;
 }
 
+void Chat::Write(Message message)
+{
+    myVector.push_back(message);
+}

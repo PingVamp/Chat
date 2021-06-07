@@ -18,5 +18,6 @@ public:
 	string GetSenderName();
 	string GetRecieverName();
 	string GetMessage();
+	bool GetBool() const;
 	void Showmessage();
 };
