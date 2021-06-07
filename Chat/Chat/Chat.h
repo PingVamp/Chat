@@ -7,12 +7,15 @@
 
 using namespace std;
 
-vector<Message> myVector;
+//vector<Message> myVector;
+//const User& user,
 
 class Chat
 {
 public:
-    void Show(const User& user, std::vector<Message>& message);
+    void ShowCommon(std::vector<Message>& message);
+    void ShowPrivate(string senderName, string recieverName, std::vector<Message>& message);
     void Write(Message message);
+    void ShowAveilableChats(vector<User> users, const User& user);
 };
 

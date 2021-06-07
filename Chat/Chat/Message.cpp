@@ -4,11 +4,12 @@ Message::Message(string message, string sender)
 {
 	this->_message = message;
 	this->_senderName = sender;
+	isprivate = false;
 }
 
 Message::Message(string message, string sender, string reciever)
 {
-	bool isprivate = 1;
+	isprivate = true;
 	this->_message = message;
 	this->_senderName = sender;
 	this->_recieverName = reciever;
