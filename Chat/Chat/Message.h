@@ -10,7 +10,7 @@ class Message
 	string _message;
 	string _senderName;
 	string _recieverName;
-	bool isprivate = 0;
+	bool isprivate;
 public:
 	Message(string message, string sender);
 	Message(string message, string sender, string reciever);

@@ -6,13 +6,14 @@
 #include <vector>
 #include "Message.h"
 #include "User.h"
+#include "Chat.h"
 #include <Windows.h>
 using namespace std;
 
 
-vector<Message> messages;
-vector<User> users = { User("Вася", "123"), User{"Петя","321"} };
-User* currentuser;
+vector<Message> messages = {Message("Сообщение от Васи в common","Вася"), Message("Сообщение от Васи Пете","Вася", "Петя")};
+vector<User> users = { User("Вася", "123"), User("Петя","321"), User("Олег", "345")};
+User* currentuser = nullptr;
 
 void registration()
 {
@@ -92,6 +93,7 @@ void enter()
 
 int main()
 {
+	Chat* chat = new Chat();
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
 	setlocale(LC_ALL, "Russian");
@@ -119,13 +121,59 @@ int main()
 			{
 				enter();
 			}
-			for (int i = 0; i < users.size(); i++)
+			if (currentuser != nullptr)
 			{
-				users[i].DisplayUserName();
+				while (command != "exit")
+				{
+					chat->ShowAveilableChats(users, *currentuser);
+					cout << "Введите имя пользователя, которому желаете написать или common для общего чата" << endl;
+					cout << "Введите exit для выхода" << endl;
+					cin >> command;
+					if (command == "exit")
+					{
+						continue;
+					}
+					if (command == "common")
+					{
+						chat->ShowCommon(messages);
+						while (command != "endchat")
+						{
+							cout << "Можете писать сообщения" << endl;
+							cout << "Введите endchat для выхода из чата" << endl;
+							cin >> command;
+							if (command == "endchat")
+							{
+								break;
+							}
+							else
+							{
+								messages.push_back(Message(command, currentuser->getUserName()));
+								messages[messages.size() - 1].Showmessage();
+							}
+						}
+					}
+					else
+					{
+						chat->ShowPrivate(currentuser->getUserName(), command, messages);
+						while (command != "endchat")
+						{
+							cout << "Можете писать сообщения" << endl;
+							cout << "Введите endchat для выхода из чата" << endl;
+							cin >> command;
+							if (command == "endchat")
+							{
+								break;
+							}
+							else
+							{
+								messages.push_back(Message(command, currentuser->getUserName(), command));
+								messages[messages.size() - 1].Showmessage();
+							}
+						}
+					}
+				}
 			}
-			cout << endl;
-			currentuser->DisplayUserName();
-
+			command = "";
 		}
 	}
 

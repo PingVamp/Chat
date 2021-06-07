@@ -38,6 +38,7 @@ string User::getPassword() const
     return string(_password);
 }
 
+
 Message* User::getCurrentMessage() const
 {
     return this->_ptrCurrentMessage;
