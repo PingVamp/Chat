@@ -1,7 +1,6 @@
 #include <iostream>
 #include "User.h"
 
-
 User::User(string username, string password, Message& ptrCurrentMessage)
 {
     _username = username;
