@@ -161,7 +161,7 @@ int main()
 						cout << "Введите endchat для выхода из чата" << endl;
 						while (command != "endchat")//Пока пользователь не решил выйти из чата
 						{
-							cin >> command;			//Считываем ввод пользователя
+							getline(cin, command);			//Считываем ввод пользователя
 							if (command == "endchat")	//Если команда выход из чата. то выходим
 							{
 								break;
@@ -196,7 +196,7 @@ int main()
 							cout << "Введите endchat для выхода из чата" << endl;
 							while (command != "endchat") //Пока пользователь не решил выйти из чата
 							{
-								cin >> command;			//Считываем команду пользователя
+								getline(cin, command);			//Считываем команду пользователя
 								if (command == "endchat")	//Если выход - выходим
 								{
 									break;
