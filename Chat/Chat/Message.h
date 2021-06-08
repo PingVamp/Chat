@@ -9,11 +9,12 @@ class Message
 {
 	string _message;
 	string _senderName;
-	string _recieverName;
+	string _senderLogin;
+	string _recieverLogin;
 	bool isprivate;
 public:
-	Message(string message, string sender);
-	Message(string message, string sender, string reciever);
+	Message(string message, string senderLogin, string senderName);
+	Message(string message, string senderLogin, string senderName, string reciever);
 	~Message() = default;
 	string GetSenderName();
 	string GetRecieverName();

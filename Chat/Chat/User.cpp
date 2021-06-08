@@ -14,10 +14,11 @@ User::User(string username)
     _username = username;
 }
 
-User::User(string username, string password)
+User::User(string username, string login, string password)
 {
     _username = username;
     _password = password;
+    _login = login;
 }
 
 User::User()
@@ -38,6 +39,11 @@ string User::getPassword() const
     return string(_password);
 }
 
+string User::getLogin() const
+{
+    return string(_login);
+}
+
 
 Message* User::getCurrentMessage() const
 {
@@ -52,6 +58,11 @@ void User::setUserName(string username)
 void User::DisplayUserName() const
 {
     cout << this->_username << endl;
+}
+
+void User::DisplayUserLogin() const
+{
+    cout << this->_login << endl;
 }
 
 void User::setPassword(string password)

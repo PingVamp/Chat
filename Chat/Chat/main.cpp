@@ -9,8 +9,8 @@
 
 using namespace std;
 
-vector<Message> messages = {Message("Сообщение от Васи в common","Вася"), Message("Сообщение от Васи Пете","Вася", "Петя")}; //Вектор сообщений
-vector<User> users = { User("Вася", "123"), User("Петя","321"), User("Олег", "345")}; //Вектор пользователей
+vector<Message> messages = {Message("Сообщение от Васи в common","Вася","Вася"), Message("Сообщение от Васи Пете","Вася", "Вася","Петя")}; //Вектор сообщений
+vector<User> users = { User("Вася","Вася", "123"), User("Петя", "Петя","321"), User("Олег","Олег", "345")}; //Вектор пользователей
 User* currentuser = nullptr; //Указатель на активного сейчас пользователя
 
 void registration()		//Функция регистрации новых пользователей
@@ -18,16 +18,17 @@ void registration()		//Функция регистрации новых поль
 	bool regpass = 0;	//Переменная для проверки успешности регистрации
 	string regname;		//Ввеодимое пользователем имя
 	string regpassword;	//Вводимый пользователем пароль
+	string reglogin;
 	while (regpass == 0)	//Пока регистрация не успешна
 	{
 		cout << "Регистрация" << endl;
-		cout << "Введите желаемое имя пользователя" << endl;
-		cin >> regname;			//Считываем желаемое пользователем имя
+		cout << "Введите желаемый логин" << endl;
+		cin >> reglogin;			//Считываем желаемое пользователем имя
 		for (int i = 0; i < users.size(); i++)		//Сверяем его с именами других пользователей
 		{
-			if (regname == users[i].getUserName())	//Если оно занято, то выходим из цикла
+			if (reglogin == users[i].getLogin())	//Если оно занято, то выходим из цикла
 			{
-				cout << "Имя занято. Введите другое имя" << endl;
+				cout << "Логин занят. Введите другой" << endl;
 				break;
 			}
 			else if (i + 1 == users.size())		//Если в векторе пользоваталей нет с таким же именем
@@ -40,14 +41,16 @@ void registration()		//Функция регистрации новых поль
 				}
 				else							//Если пароль содержит хотя бы  символ
 				{
+					cout << "Введите отображаемое имя пользователя" << endl;
+					cin >> regname;
 					ofstream out("users.txt", std::ios::app);	//Создаем поток для записи в фаил
 
 					if (out.is_open())		//Если получилось открыть фаил
 					{
-						out << regname << " " << regpassword << std::endl;	//Записываем имя и пароль введенне пользоватлем
+						out << regname << " " << reglogin << " " << regpassword << std::endl;	//Записываем имя и пароль введенне пользоватлем
 					}
 					out.close();		//Закрываем поток
-					users.push_back(User(regname, regpassword));	//Записываем пользователя в вектор пользователей
+					users.push_back(User(regname,reglogin, regpassword));	//Записываем пользователя в вектор пользователей
 					cout << "Регистрация успешна" << endl;
 					regpass = 1;		//Указываем успешность регистрации для выхода из цикла
 					break;
@@ -61,16 +64,16 @@ void registration()		//Функция регистрации новых поль
 
 void enter()		//Функция входа зарегестрированных пользователей
 {
-	string username;	//Переменная для считывагия ввода имени пользователя
+	string login;	//Переменная для считывагия ввода имени пользователя
 	string password;	//Переменная для считывания ввода пароля
 	bool enterpass = 0;	//Переменная проверки успешности входа для выхода из цикла
 	while (enterpass == 0)		//Пока вход не успешен
 	{
-		cout << "Введите имя пользователя" << endl;
-		cin >> username;		//Считываем имя пользователя
+		cout << "Введите Логин" << endl;
+		cin >> login;		//Считываем имя пользователя
 		for (int i = 0; i < users.size(); i++)		//Сверяем его с именами зарегестрированных пользователей
 		{
-			if (users[i].getUserName() == username)	//Если есть совпадение
+			if (users[i].getLogin() == login)	//Если есть совпадение
 			{
 				cout << "Введите пароль" << endl;
 				cin >> password;					//Считываем пароль
@@ -106,14 +109,15 @@ int main()
 	bool recieverexists = 0;	//Проверка на существование принимающего сообщения с определенным именем
 	string inusername;			//Переменная для принятия имени из фаила
 	string inpassword;			//Переменная для принятия пароля из фаила
+	string inlogin;
 	string reciever;			//Переменная для записи имени принимающего сообщение
 	string command = "";		//Переменная для считывания пользовательских комманд
 	ifstream in("users.txt");	// окрываем файл для чтения
 	if (in.is_open())			//Если открытие успешно
 	{
-		while (in >> inusername >> inpassword)	//Пока что-либо не сломалось или не дошли до конца фаила, считываем имя и пароль
+		while (in >> inusername >> inlogin >> inpassword)	//Пока что-либо не сломалось или не дошли до конца фаила, считываем имя и пароль
 		{
-			users.push_back(User(inusername,inpassword));	//Записываем в вектор пользователя с таким именем и паролем
+			users.push_back(User(inusername, inlogin, inpassword));	//Записываем в вектор пользователя с таким именем и паролем
 		}
 	}
 	in.close();	//Когда закончили с фаилом закрываем поток
@@ -143,7 +147,7 @@ int main()
 				while (command != "exit")//Пока он не решил выйти
 				{
 					chat->ShowAveilableChats(users, *currentuser);	//Показываем доступные этому пользователю чаты
-					cout << "Введите имя пользователя, которому желаете написать или common для общего чата" << endl;
+					cout << "Введите логин, которому желаете написать или common для общего чата" << endl;
 					cout << "Введите exit для выхода" << endl;
 					cin >> command;	//Считываем комманду пользователя
 					if (command == "exit")	//Если пользователь решил выйти - выходим
@@ -164,7 +168,7 @@ int main()
 							}
 							else					//Иначе записываем сообщение в вектор и показываем его 
 							{
-								messages.push_back(Message(command, currentuser->getUserName()));
+								messages.push_back(Message(command,currentuser->getLogin(), currentuser->getUserName()));
 								messages[messages.size() - 1].Showmessage();
 							}
 						}
@@ -173,7 +177,7 @@ int main()
 					{
 						for (int i = 0; i < users.size(); i++)		//Сверяем его с именами зарегестрированных пользователей
 						{
-							if (users[i].getUserName() == command)	//Если есть совпадение
+							if (users[i].getLogin() == command)	//Если есть совпадение
 							{
 								reciever = command;	//Записываем имя того, кому польхователь решил отправить сообщение
 								recieverexists = 1;
@@ -199,7 +203,7 @@ int main()
 								}
 								else						//Если не выход, записываем сообщение в вектор сообщений и показываем
 								{
-									messages.push_back(Message(command, currentuser->getUserName(), reciever));
+									messages.push_back(Message(command, currentuser->getLogin(), currentuser->getUserName(), reciever));
 									messages[messages.size() - 1].Showmessage();
 								}
 							}

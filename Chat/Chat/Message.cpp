@@ -1,28 +1,30 @@
 #include "Message.h"
 
-Message::Message(string message, string sender)
+Message::Message(string message, string senderLogin, string senderName)
 {
 	this->_message = message;
-	this->_senderName = sender;
+	this->_senderLogin = senderLogin;
+	this->_senderName = senderName;
 	isprivate = false;
 }
 
-Message::Message(string message, string sender, string reciever)
+Message::Message(string message, string senderLogin, string senderName, string reciever)
 {
 	isprivate = true;
 	this->_message = message;
-	this->_senderName = sender;
-	this->_recieverName = reciever;
+	this->_senderLogin = senderLogin;
+	this->_senderName = senderName;
+	this->_recieverLogin = reciever;
 }
 
 string Message::GetSenderName()
 {
-	return this->_senderName;
+	return this->_senderLogin;
 }
 
 string Message::GetRecieverName()
 {
-	return this->_recieverName;
+	return this->_recieverLogin;
 }
 
 string Message::GetMessage()

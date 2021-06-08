@@ -17,18 +17,18 @@ void Chat::ShowCommon(std::vector<Message>& message) //вывод сообщений из общего
     }
 }
 
-void Chat::ShowPrivate(string senderName, string recieverName, std::vector<Message>& message) //вывод личных сообщений
+void Chat::ShowPrivate(string senderLogin, string recieverLogin, std::vector<Message>& message) //вывод личных сообщений
 {
     size_t size = message.size();
     for (size_t c = 0; c < size; c++)
     {
         if (message[c].GetBool() == true) //проверка того, что сообщение личное
         {
-            if (senderName == message[c].GetSenderName() && recieverName == message[c].GetRecieverName()) // вывод если входящее сообщение для пользователя
+            if (senderLogin == message[c].GetSenderName() && recieverLogin == message[c].GetRecieverName()) // вывод если входящее сообщение для пользователя
             {
                 message[c].Showmessage();
             }
-            else if (senderName == message[c].GetRecieverName() && recieverName == message[c].GetSenderName()) // вывод если исходящее от пользователя
+            else if (senderLogin == message[c].GetRecieverName() && recieverLogin == message[c].GetSenderName()) // вывод если исходящее от пользователя
             {
                 message[c].Showmessage();
             }
@@ -45,13 +45,13 @@ void Chat::ShowAveilableChats(vector<User> users, const User& user) // вывод дос
     cout << "common" << endl;
     for (int i = 0; i < users.size(); i++)
     {
-        if (users[i].getUserName() == user.getUserName()) 
+        if (users[i].getLogin() == user.getLogin()) 
         {
             continue; // пропуск текущего пользователя
         }
         else
         {
-            users[i].DisplayUserName(); // вывод всех пользователей
+            users[i].DisplayUserLogin();; // вывод всех пользователей
         }
     }
 }
