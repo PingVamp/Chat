@@ -216,14 +216,5 @@ int main()
 			command = "";
 		}
 	}
-
-	/*messages.push_back(Message("Привет", "Вася"));
-	messages.push_back(Message("Хэллоу", "Петя"));
-	messages.push_back(Message("Хэллоу", "Петя", "Вася"));
-	for (int i = 0; i < messages.size(); i++)
-	{
-		messages[i].Showmessage();
-	}*/
-
 }
 
