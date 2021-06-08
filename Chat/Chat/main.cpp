@@ -8,6 +8,8 @@
 #include "User.h"
 #include "Chat.h"
 #include <Windows.h>
+#include <fstream>
+
 using namespace std;
 
 
@@ -42,6 +44,13 @@ void registration()
 				}
 				else
 				{
+					ofstream out("users.txt", std::ios::app);
+
+					if (out.is_open())
+					{
+							out << regname << " " << regpassword << std::endl;
+					}
+					out.close();
 					users.push_back(User(regname, regpassword));
 					cout << "Регистрация успешна" << endl;
 					regpass = 1;
@@ -98,8 +107,19 @@ int main()
 	SetConsoleOutputCP(1251);
 	setlocale(LC_ALL, "Russian");
 	bool exit = 0;
+	string inusername;
+	string inpassword;
 	string reciever;
 	string command = "";
+	ifstream in("users.txt"); // окрываем файл для чтения
+	if (in.is_open())
+	{
+		while (in >> inusername >> inpassword)
+		{
+			users.push_back(User(inusername,inpassword));
+		}
+	}
+	in.close();
 
 	//раз раз раз
 	while (exit != 1)
