@@ -24,7 +24,7 @@ public:
     string getUserName() const; 
     string getPassword() const; 
     Message* getCurrentMessage() const; 
-    void DisplayUserName() const; // вывод имени пользователя на экран
+    void DisplayUserName() const; // вывод на экран имени пользователя
     void setUserName(string username); 
     void setPassword(string password); 
     void setCurrentMessage(Message& ptrCurrentMessage); 
