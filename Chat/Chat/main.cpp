@@ -48,7 +48,7 @@ void registration()		//Функция регистрации новых поль
 
 					if (out.is_open())		//Если получилось открыть фаил
 					{
-							out << regname << " " << regpassword << std::endl;	//Записываем имя и пароль введенне пользоватлем
+						out << regname << " " << regpassword << std::endl;	//Записываем имя и пароль введенне пользоватлем
 					}
 					out.close();		//Закрываем поток
 					users.push_back(User(regname, regpassword));	//Записываем пользователя в вектор пользователей
@@ -61,6 +61,7 @@ void registration()		//Функция регистрации новых поль
 	}
 	regpass = 0;
 }
+
 
 void enter()		//Функция входа зарегестрированных пользователей
 {

@@ -63,3 +63,4 @@ void User::setCurrentMessage(Message& ptrCurrentMessage)
 {
     this->_ptrCurrentMessage = &ptrCurrentMessage;
 }
+
