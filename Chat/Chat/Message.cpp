@@ -4,12 +4,12 @@ Message::Message(string message, string sender)
 {
 	this->_message = message;
 	this->_senderName = sender;
-	isprivate = false;
+	isprivate = false;		//Для сообщений в common ставим isprivate false
 }
 
 Message::Message(string message, string sender, string reciever)
 {
-	isprivate = true;
+	isprivate = true;				//Для личных сообщений ставим isprivate true
 	this->_message = message;
 	this->_senderName = sender;
 	this->_recieverName = reciever;
@@ -37,5 +37,5 @@ bool Message::GetBool() const
 
 void Message::Showmessage()
 {
-	cout << this->_senderName <<":" << this->_message << endl;
+	cout << this->_senderName <<":" << this->_message << endl;	//Выводит Имя отправителя:Сообщение
 }
