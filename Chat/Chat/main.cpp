@@ -107,6 +107,7 @@ int main()
 	SetConsoleOutputCP(1251);
 	setlocale(LC_ALL, "Russian");
 	bool exit = 0;				//Переменная для проверки желания пользователем выйти
+	bool recieverexists = 0;	//Проверка на существование принимающего сообщения с определенным именем
 	string inusername;			//Переменная для принятия имени из фаила
 	string inpassword;			//Переменная для принятия пароля из фаила
 	string reciever;			//Переменная для записи имени принимающего сообщение
@@ -175,23 +176,40 @@ int main()
 					}
 					else				//Если пользователь решил войти в приватный чат
 					{
-						reciever = command;	//Записываем имя того, кому польхователь решил отправить сообщение
-						chat->ShowPrivate(currentuser->getUserName(), command, messages);	//Показываем сообщения между этими двумя пользователями
-						while (command != "endchat") //Пока пользователь не решил выйти из чата
+						for (int i = 0; i < users.size(); i++)		//Сверяем его с именами зарегестрированных пользователей
 						{
-							cout << "Можете писать сообщения" << endl;
-							cout << "Введите endchat для выхода из чата" << endl;
-							cin >> command;			//Считываем команду пользователя
-							if (command == "endchat")	//Если выход - выходим
+							if (users[i].getUserName() == command)	//Если есть совпадение
 							{
+								reciever = command;	//Записываем имя того, кому польхователь решил отправить сообщение
+								recieverexists = 1;
 								break;
 							}
-							else						//Если не выход, записываем сообщение в вектор сообщений и показываем
+							else if ((i + 1 == users.size()))	//Если мы прошли по всему массиву пользователей и не нашли подхлдящего
 							{
-								messages.push_back(Message(command, currentuser->getUserName(), reciever));
-								messages[messages.size() - 1].Showmessage();
+								cout << "Нет такого пользователя" << endl;		//Жалуемся на это
+							}
+
+						}
+						if (recieverexists == 1)
+						{
+							chat->ShowPrivate(currentuser->getUserName(), reciever, messages);	//Показываем сообщения между этими двумя пользователями
+							while (command != "endchat") //Пока пользователь не решил выйти из чата
+							{
+								cout << "Можете писать сообщения" << endl;
+								cout << "Введите endchat для выхода из чата" << endl;
+								cin >> command;			//Считываем команду пользователя
+								if (command == "endchat")	//Если выход - выходим
+								{
+									break;
+								}
+								else						//Если не выход, записываем сообщение в вектор сообщений и показываем
+								{
+									messages.push_back(Message(command, currentuser->getUserName(), reciever));
+									messages[messages.size() - 1].Showmessage();
+								}
 							}
 						}
+						recieverexists = 0;
 					}
 				}
 			}
