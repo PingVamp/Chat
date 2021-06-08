@@ -18,6 +18,6 @@ public:
 	string GetSenderName();
 	string GetRecieverName();
 	string GetMessage();
-	bool GetBool() const;
-	void Showmessage();
+	bool GetBool() const; // возвращает значение переменной isprivate 
+	void Showmessage(); // вывод на экран сообщения в формате "имя отправителя": "сообщение"
 };

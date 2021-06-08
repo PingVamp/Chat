@@ -21,11 +21,11 @@ public:
 
     ~User();
 
-    string getUserName() const;
-    string getPassword() const;
-    Message* getCurrentMessage() const;
-    void DisplayUserName() const;
-    void setUserName(string username);
-    void setPassword(string password);
-    void setCurrentMessage(Message& ptrCurrentMessage);
+    string getUserName() const; 
+    string getPassword() const; 
+    Message* getCurrentMessage() const; 
+    void DisplayUserName() const; // вывод имени пользователя на экран
+    void setUserName(string username); 
+    void setPassword(string password); 
+    void setCurrentMessage(Message& ptrCurrentMessage); 
 };
