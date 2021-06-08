@@ -187,10 +187,10 @@ int main()
 						if (recieverexists == 1)
 						{
 							chat->ShowPrivate(currentuser->getUserName(), reciever, messages);	//Показываем сообщения между этими двумя пользователями
+							cout << "Можете писать сообщения" << endl;
+							cout << "Введите endchat для выхода из чата" << endl;
 							while (command != "endchat") //Пока пользователь не решил выйти из чата
 							{
-								cout << "Можете писать сообщения" << endl;
-								cout << "Введите endchat для выхода из чата" << endl;
 								cin >> command;			//Считываем команду пользователя
 								if (command == "endchat")	//Если выход - выходим
 								{
