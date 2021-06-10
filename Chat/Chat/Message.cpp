@@ -1,43 +1,34 @@
 #include "Message.h"
 
-Message::Message(string message, string senderLogin, string senderName)
+Message::Message(const string& message, const string& senderLogin, const string& senderName) : _message(message), _senderName(senderName), _senderLogin(senderLogin), _isPrivate(false)
 {
-	this->_message = message;
-	this->_senderLogin = senderLogin;
-	this->_senderName = senderName;
-	isprivate = false;
 }
 
-Message::Message(string message, string senderLogin, string senderName, string reciever)
+Message::Message(const string& message, const string& senderName, const string& senderLogin, const string& reciever) : _message(message), _senderName(senderName), _senderLogin(senderLogin), _recieverLogin(reciever), _isPrivate(true)
 {
-	isprivate = true;
-	this->_message = message;
-	this->_senderLogin = senderLogin;
-	this->_senderName = senderName;
-	this->_recieverLogin = reciever;
 }
 
-string Message::GetSenderName()
+string Message::GetSenderName() const
 {
-	return this->_senderLogin;
+	return _senderLogin;
 }
 
-string Message::GetRecieverName()
+string Message::GetRecieverName() const
 {
-	return this->_recieverLogin;
+	return _recieverLogin;
 }
 
-string Message::GetMessage()
+string Message::GetMessage() const
 {
-	return this->_message;
+	return _message;
 }
 
 bool Message::GetBool() const
 {
-	return this->isprivate;
+	return _isPrivate;
 }
 
-void Message::Showmessage()
+void Message::ShowMessage() const
 {
-	cout << this->_senderName <<":" << this->_message << endl;
+	cout << _senderName <<":" << _message << endl;
 }

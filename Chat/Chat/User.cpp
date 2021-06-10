@@ -2,30 +2,15 @@
 #include "User.h"
 
 
-User::User(string username, string password, Message* ptrCurrentMessage)
-{
-    _username = username;
-    _password = password;
-    this->_ptrCurrentMessage = ptrCurrentMessage;
-}
-
-User::User(string username) 
-{
-    _username = username;
-}
-
-User::User(string username, string login, string password)
-{
-    _username = username;
-    _password = password;
-    _login = login;
-}
-
-User::User()
+User::User(const string& username, const string& password, Message* ptrCurrentMessage) : _username(username), _password(password), _ptrCurrentMessage(ptrCurrentMessage)
 {
 }
 
-User::~User()
+User::User(const string& username) : _username(username)
+{
+}
+
+User::User(const string& username, const string& login, const string& password) : _username(username), _password(password), _login(login)
 {
 }
 
@@ -47,31 +32,31 @@ string User::getLogin() const
 
 Message* User::getCurrentMessage() const
 {
-    return this->_ptrCurrentMessage;
+    return _ptrCurrentMessage;
 }
 
-void User::setUserName(string username)
+void User::setUserName(const string& username)
 {
     _username = username;
 }
 
 void User::DisplayUserName() const
 {
-    cout << this->_username << endl;
+    cout << _username << endl;
 }
 
 void User::DisplayUserLogin() const
 {
-    cout << this->_login << endl;
+    cout << _login << endl;
 }
 
-void User::setPassword(string password)
+void User::setPassword(const string& password)
 {
     _password = password;
 }
 
 void User::setCurrentMessage(Message& ptrCurrentMessage)
 {
-    this->_ptrCurrentMessage = &ptrCurrentMessage;
+    _ptrCurrentMessage = &ptrCurrentMessage;
 }
 

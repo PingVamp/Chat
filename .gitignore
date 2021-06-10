@@ -15,3 +15,9 @@
 /Chat/Chat/Chat.vcxproj
 /Chat/Chat/Chat.vcxproj.filters
 /Chat/Chat/Chat.vcxproj.user
+/Chat/Chat/x64/Debug/Chat.tlog
+/Chat/Chat/x64/Debug
+/Chat/x64/Debug
+*.user
+/Chat/Chat/CMakeLists.txt
+/Chat/Chat/users.txt
